@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
+import imgImage from '../assets/img/image.svg';
 
 const Container = styled.div`
   position: relative;
@@ -51,6 +52,14 @@ const Button = styled.button`
   font-size: 16px;
   outline: none;
   margin-right: 8px;
+
+  &.blue {
+    background-color: #00bcd4;
+
+    &:hover {
+      background-color: #05e1fd;
+    }
+  }
 
   &:hover {
     background-color: #6ef173;
@@ -107,12 +116,12 @@ const ChatView = ({ onSend = () => {}, onUpload = () => {} }) => {
         </Button>
 
         <Button
-          style={{ fontSize: 26 }}
+          className="blue"
           onClick={() => {
             ref.current.click();
           }}
         >
-          ⬆
+          <img src={imgImage} alt="⬆" />
         </Button>
       </Right>
     </Container>
