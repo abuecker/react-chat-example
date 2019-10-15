@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 
 const Container = styled.div`
@@ -32,6 +32,7 @@ const TextArea = styled.textarea`
 `;
 
 const Right = styled.div`
+  display: flex;
   flex: 0 0 50px;
   height: 100%;
   padding-left: 12px;
@@ -49,14 +50,36 @@ const Button = styled.button`
   font-weight: bold;
   font-size: 16px;
   outline: none;
+  margin-right: 8px;
 
   &:hover {
     background-color: #6ef173;
   }
+
+  &:last-child {
+    margin-right: 0px;
+  }
 `;
 
-const ChatView = ({ onSend = () => {} }) => {
+const ChatView = ({ onSend = () => {}, onUpload = () => {} }) => {
   const [value, setValue] = useState('');
+  const ref = useRef();
+  const [file, setFile] = useState();
+
+  useEffect(() => {
+    if (!file) {
+      return;
+    }
+    const reader = new FileReader();
+
+    reader.onloadend = e => {
+      onUpload(e.target.result);
+      setFile(null);
+    };
+
+    reader.readAsDataURL(file);
+    // eslint-disable-next-line
+  }, [file]);
 
   return (
     <Container>
@@ -64,6 +87,13 @@ const ChatView = ({ onSend = () => {} }) => {
         placeholder="Enter a Message"
         value={value}
         onChange={e => setValue(e.target.value)}
+      />
+
+      <input
+        style={{ display: 'none' }}
+        ref={ref}
+        type="file"
+        onChange={e => setFile(e.target.files[0])}
       />
 
       <Right>
@@ -74,6 +104,15 @@ const ChatView = ({ onSend = () => {} }) => {
           }}
         >
           Send
+        </Button>
+
+        <Button
+          style={{ fontSize: 26 }}
+          onClick={() => {
+            ref.current.click();
+          }}
+        >
+          ⬆
         </Button>
       </Right>
     </Container>

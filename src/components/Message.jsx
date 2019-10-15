@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/macro';
 import moment from 'moment';
 
-const Container = styled.div`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -18,7 +18,7 @@ const Container = styled.div`
   }
 `;
 
-const Time = styled.div`
+export const Time = styled.div`
   font-size: 0.8em;
   font-style: italic;
   line-height: 1.61;
@@ -26,7 +26,7 @@ const Time = styled.div`
   margin-bottom: 8px;
 `;
 
-const Name = styled.div`
+export const Name = styled.div`
   font-weight: bold;
   line-height: 1.61;
 `;
