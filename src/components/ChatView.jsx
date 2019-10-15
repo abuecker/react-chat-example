@@ -33,7 +33,10 @@ const ChatView = ({ name = '' }) => {
 
       <MessagesView who={displayName} />
 
-      <MessageInput onSend={val => publish(displayName, val)} />
+      <MessageInput
+        onSend={val => publish(displayName, val)}
+        onUpload={dataUrl => publish(displayName, dataUrl, 'image')}
+      />
     </Container>
   );
 };

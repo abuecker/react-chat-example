@@ -2,6 +2,7 @@ import React, { useContext, useRef, useEffect } from 'react';
 import styled from 'styled-components/macro';
 import { MessagesContext } from '../contexts/messages';
 import Message from './Message';
+import Image from './Image';
 
 const Container = styled.div`
   flex: 1 1 100px;
@@ -26,9 +27,16 @@ const MessagesView = ({ who }) => {
 
   return (
     <Container ref={ref}>
-      {messages.map((msg, idx) => (
-        <Message key={idx} isSender={msg.name === who} message={msg} />
-      ))}
+      {messages.map((msg, idx) => {
+        switch (msg.type) {
+          case 'image':
+            return <Image isSender={msg.name === who} message={msg} />;
+          default:
+            return (
+              <Message key={idx} isSender={msg.name === who} message={msg} />
+            );
+        }
+      })}
     </Container>
   );
 };
