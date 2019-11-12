@@ -107,21 +107,21 @@ const ChatView = ({ onSend = () => {}, onUpload = () => {} }) => {
 
       <Right>
         <Button
-          onClick={() => {
-            onSend(value);
-            setValue('');
-          }}
-        >
-          Send
-        </Button>
-
-        <Button
           className="blue"
           onClick={() => {
             ref.current.click();
           }}
         >
           <img src={imgImage} alt="⬆" />
+        </Button>
+
+        <Button
+          onClick={() => {
+            onSend(value);
+            setValue('');
+          }}
+        >
+          Send
         </Button>
       </Right>
     </Container>
